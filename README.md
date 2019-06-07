@@ -7,7 +7,7 @@ Our simple magento 2 module use webpack for React Components Compilation and aut
 
 What's good - you can develop React component even without magento at all. When you finished you can just copy your component inside magento Module and add some fixes into sources to work with  Require JS and use React Component as Magento UI.
 
-A lot of Big companies Already Use this React Appoach with Magento:
+A lot of Big e-commerce companies Already Use this React Appoach :
 - BestBuy.mx
 - beautycounter.com
 - icuracao.com
