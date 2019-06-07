@@ -13,3 +13,5 @@ A lot of Big companies Already Use this React Appoach with Magento:
 - icuracao.com
 - bloomnation.com
 - plantt.com
+- gap.com
+- walmart.com
