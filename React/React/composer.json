@@ -1,0 +1,26 @@
+{
+    "name": "react/react",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "egorshitikov@gmail.com",
+            "name": "Yegor Shytikov"
+        },
+        {
+            "email": "sh.kiruh@gmail.com",
+            "name": "Kirill Shitikov"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "React\\React\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

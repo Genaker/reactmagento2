@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+
+		<add id="React::top_level" module="React_React" resource="Magento_Backend::content" sortOrder="9999" title="React"/>
+
+		<add action="react_react/index/index" id="React_React::index_index" module="React_React" parent="React::top_level" resource="React_React::index_index" sortOrder="9999" title="React test"/>
+	</menu>
+</config>
