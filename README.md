@@ -15,7 +15,8 @@ From the extension root (React/React) folder run:
 npm install
 npm start
 ```
-
+Web Puck compile everethin into 
+React/React/view/base/web/js/index_bundle.js
 
 A lot of Big e-commerce companies Already Use this React Approach :
 - BestBuy.mx
