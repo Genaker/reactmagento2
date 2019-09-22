@@ -10,8 +10,11 @@ What's good - you can develop React component even without magento at all. When 
 
 # How to use WebPack for React with Magento 2 
 Install Node.LS
-From the extension folder run:
+From the extension root (React/React) folder run:
+```
+npm install
 npm start
+```
 
 
 A lot of Big e-commerce companies Already Use this React Approach :
