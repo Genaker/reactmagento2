@@ -9,7 +9,7 @@ What's good - you can develop React component even without magento at all. When 
 
 
 # How to use WebPack for React with Magento 2 
-Install Node.JS
+Install Node.JS (https://github.com/nodesource/distributions/blob/master/README.md)
 From the extension root (React/React) folder run:
 ```
 npm install
@@ -17,6 +17,15 @@ npm start
 ```
 Web Puck compile everethin into 
 React/React/view/base/web/js/index_bundle.js
+
+# Magento 2 live reload 
+This project aims to solve the case where you want assets served by your Magento app server, but still want reloads triggered from webpack's build pipeline.
+
+Add a script tag to your page pointed at the livereload server
+
+```<script src="http://localhost:35729/livereload.js"></script>```
+
+For development purpose better disable browser caching (https://www.technipages.com/google-chrome-how-to-completely-disable-cache)
 
 A lot of Big e-commerce companies Already Use this React Approach :
 - BestBuy.mx
