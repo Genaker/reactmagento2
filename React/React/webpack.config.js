@@ -12,7 +12,7 @@ console.log(path.join(__dirname, "/view/base/web/js/"));
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.join(__dirname, "/view/base/web/js/"),
+    path: path.join(__dirname, "view/base/web/js/"),
     filename: "index_bundle.js"
   },
   /*externals: {
