@@ -28,6 +28,9 @@ Add a script tag to your page pointed at the livereload server
 
 For development purpose better disable browser caching (https://www.technipages.com/google-chrome-how-to-completely-disable-cache)
 
+# Simmilar Projects:
+Good Magento 2 react approach from good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
+
 A lot of Big e-commerce companies Already Use this React Approach :
 - BestBuy.mx
 - beautycounter.com
