@@ -28,6 +28,14 @@ Add a script tag to your page pointed at the livereload server
 
 For development purpose better disable browser caching (https://www.technipages.com/google-chrome-how-to-completely-disable-cache)
 
+Disable react bundle caching for development using Nginx (not tested):
+```
+  location ~ index_bundle\.js {
+    add_header Cache-Control no-cache;
+    expires 0;
+  }
+```
+
 # Simmilar Projects:
 Good Magento 2 react approach from good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
 
