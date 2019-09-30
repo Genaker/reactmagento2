@@ -6,7 +6,7 @@ Our simple magento 2 module use WebPack for React Components Compilation and aut
 
 You can develop React component even without magento at all. When you finished you can just copy your component inside magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI.
 
-#How to use WebPack for React with Magento 2
+# How to use WebPack for React with Magento 2
 
 Install Node.JS (https://github.com/nodesource/distributions/blob/master/README.md) From the extension root (React/React) folder run:
 ```
