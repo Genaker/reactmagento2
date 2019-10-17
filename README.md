@@ -1,7 +1,6 @@
 # Do you have questions How to integrate ReactJS with Magento 2 frontend? This magento module will help you
 React Magento 2 implementation. This Simple module explains how to add and use React Components with Magento 2 and forgot about Knockout/JQuery Magento 2 UI.
-![Picture FireBearStudio](https://github.com/Genaker/reactmagento2/blob/master/KnockoutMagento2React.jpg)
-Picture FireBearStudio
+![React + Magento 2](https://github.com/Genaker/reactmagento2/blob/master/KnockoutMagento2React.png)
 
 
 It is not PWA or headless implementation which is impossible to use with existing web site and also they have issue with magento 2 API performance - to slow. This implementation is High Performance Hybrid React integration with magento2 (with magento 1 also easy to use) it uses inline json dirrectly from the page. The same approach used in magento 2 backend and frontend checkout, color swatchers by default. Also can use Ajax http call to fetch data (not the best solution magento API is slow and will increase load on your beckend server). Or you  can use my future project "Microservicess magento" to fetch data.
