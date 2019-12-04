@@ -16,7 +16,7 @@ npm install
 npm start
 ```
 
-Web Puck compile everything automaticaly into React/React/view/base/web/js/index_bundle.js and deploys to pub/static without running static:deploy ssh command. LiveReload Plugin will reload magento 2 pages automatically (not recommended solution by React Community. F5  more reliable solution). What you need just disable Cache of your browser during development. Also You can disable caching for single react bundle file via nginx config.
+Web Puck compile everything automatically into React/React/view/base/web/js/index_bundle.js and deploys to pub/static without running static:deploy ssh command. LiveReload Plugin will reload magento 2 pages automatically (not recommended solution by React Community. F5  more reliable solution). What you need just disable Cache of your browser during development. Also You can disable caching for single react bundle file via nginx config.
 
 # Magento 2 live reload
 
@@ -40,6 +40,9 @@ location ~ index_bundle\.js {
 
 # Similar Projects:
 Good Magento 2 react approach from good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
+
+Something similar from integer_net GmbH : (https://github.com/integer-net/magento2-reactapp)
+
 
 ## A lot of Big e-commerce companies Already Use this React Approach :
 BestBuy.mx
