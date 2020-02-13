@@ -37,6 +37,9 @@ module.exports = {
   },
   ///var/www/html/magento
   ///var/www/html/magento/../../../../../../../../index_bundle.js
+  
+ 
+  //Deployment path needs to be adjusted  
   plugins: [
     new LiveReloadPlugin(),
     new CopyWebpackPlugin([
