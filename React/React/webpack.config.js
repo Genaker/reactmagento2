@@ -42,12 +42,12 @@ module.exports = {
     new CopyWebpackPlugin([
         {
           from:path.join(__dirname, "/view/base/web/js/"),
-          to:'../../../../../../../../pub/static/frontend/Curacao/curacao/en_US/Curacao_ReactTable/js/',
+          to:'../../../../../../../../pub/static/frontend/{ThemeNamae}/{theme}/en_US/React_React/js/',
           force: true
         },
       {
         from:path.join(__dirname, "/view/base/web/js/"),
-        to:'../../../../../../../../magento/pub/static/frontend/Curacao/curacao/en_US/Curacao_ReactTable/js/',
+        to:'../../../../../../../../magento/pub/static/frontend/{ThemeName}/{theme}/en_US/React_React/js/',
         force: true
       }
       ]),
