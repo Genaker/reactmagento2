@@ -58,7 +58,7 @@ Transform syntax:
 - Polyfill features that are missing in your target environment (through @babel/polyfill)
 - Source code transformations (codemods)
 
-# JSX and React 2 with Magento 1,2 
+# JSX and React with Magento 1,2 
 
 JSX is an XML-like syntax extension to ECMAScript without any defined semantics. It's NOT intended to be implemented by engines or browsers. It's NOT a proposal to incorporate JSX into the ECMAScript spec itself. It's intended to be used by various preprocessors (transpilers) to transform these tokens into standard ECMAScript. In our case transpiler is Babel. 
 Babel can convert JSX syntax!
