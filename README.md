@@ -18,6 +18,55 @@ npm start
 
 Web Puck compiles everything automatically into React/React/view/base/web/js/index_bundle.js and deploys to pub/static without running static:deploy ssh command. LiveReload Plugin will reload magento 2 pages automatically (not recommended solution by React Community. F5  more reliable solution). What you need just disable Cache of your browser during development. Also You can disable caching for single react bundle file via Nginx config.
 
+# Easy deployment 
+
+Useage of webPack sometimes is to difficult for Magento developers. I have create anoter way to use React with magento without any compilation/complication.
+Simply add this files to the Magento instalation:
+```
+// React JS itself 
+<script src='https://npmcdn.com/react-dom@15.3.0/dist/react-dom.min.js'></script>
+// Babel to avoid compilation 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+//Add to the page to render React component
+<div id = "magentoReactApp"> </div>
+
+//Write you scripts using babel 
+<script type="text/babel">
+
+var App = React.createClass({
+	render: function() {
+		return(
+			<div className="App">
+	             {/*Your APP code there */}
+			</div>
+		);
+	}
+});
+ReactDOM.render(
+	<App />,
+	document.getElementById('magentoReactApp')
+);
+</script>
+```
+
+# What is Babel for Magento?
+Babel is a JavaScript compiler
+Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
+
+Transform syntax:
+- Polyfill features that are missing in your target environment (through @babel/polyfill)
+- Source code transformations (codemods)
+
+# JSX and React 2 with Magento 1,2 
+
+JSX is an XML-like syntax extension to ECMAScript without any defined semantics. It's NOT intended to be implemented by engines or browsers. It's NOT a proposal to incorporate JSX into the ECMAScript spec itself. It's intended to be used by various preprocessors (transpilers) to transform these tokens into standard ECMAScript. In our case transpiler is Babel. 
+Babel can convert JSX syntax!
+
+Use Bable for Magento via UNPKG: https://unpkg.com/@babel/standalone/babel.min.js. This is a simple way to embed it on a webpage without having to do any other setup.
+
+When loaded in a browser, @babel/standalone will automatically compile and execute all Magentos script tags with type 'text/babel' or 'text/jsx'
+
 # Magento 2 live reload
 
 This project aims to solve the case where you want assets served by your Magento app server, but still want reloads triggered from webpack's build pipeline.
