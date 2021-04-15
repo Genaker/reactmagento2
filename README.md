@@ -7,7 +7,7 @@ Our simplest magento 2 module use WebPack for React Components Compilation and a
 
 You can develop React component even without magento instalation at all. You can just copy your component inside magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI component.
 
-# Magento 2 Admin module built with ReactJS instead of legacy magento default JS:
+# Magento 2 Admin module built with ReactJS instead of the legacy default JS:
 
 (https://github.com/Genaker/Magento2OPcacheGUI)
 
