@@ -88,6 +88,8 @@ location ~ index_bundle\.js {
 ```
 
 # Similar Projects:
+Magento 2 Admin module build with ReactJS instead of legacy magento default JS: (https://github.com/Genaker/Magento2OPcacheGUI)
+
 Good Magento 2 react approach from good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
 
 Something similar from integer_net GmbH : (https://github.com/integer-net/magento2-reactapp)
