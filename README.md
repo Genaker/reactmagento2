@@ -1,11 +1,15 @@
-# Do you have questions How to integrate ReactJS with Magento 2 frontend? This magento module will help you
+# Do you have questions How to integrate ReactJS with Magento 2 frontend? This Magento module will help you
 React Magento 2 implementation. This Simple module explains how to add and use React Components with Magento 2 and forgot about Knockout/JQuery Magento 2 UI.
 ![React + Magento 2](https://github.com/Genaker/reactmagento2/blob/master/KnockoutMagento2React.png)
 
-It is not PWA or headless implementation which is impossible to use with existing web site and also they have issue with magento 2 API performance - to slow. This implementation is High Performance Hybrid React integration with magento2 (with magento 1 also easy to use) it uses inline json directly from the page. The same approach used in magento 2 backend and frontend checkout, color swatches by default. Also can use Ajax http call to fetch data (not the best solution magento API is slow and will increase load on your beckend server). Or you  can use my future project "Microservicess magento" to fetch data.
-Our simplest magento 2 module use WebPack for React Components Compilation and automatic static content deployment into magento pub/static folder.
+# Updates:
+- New improved version with the React 17 is available as a **react-17** branch (https://github.com/Genaker/reactmagento2/tree/react-17)
+- This version provides stand-along React 17 without using RequireJS
 
-You can develop React component even without magento instalation at all. You can just copy your component inside magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI component.
+It is not PWA or headless implementation which is impossible to use with an existing website. Also Single Page Application (SPA) PWA Magento 2 implementations have issues with Magento 2 API performance - too slow. This implementation is High-Performance Hybrid React integration with magento2 (with Magento 1 also easy to use) it uses inline JSON directly from the page. The same approach is used in Magento 2 backend and frontend checkout, color swatches by default. Also can use Ajax HTTP call to fetch data (not the best solution Magento API is slow and will increase the load on your backend server). Or you can use my future project "Microservices Magento" to fetch data.
+Our simplest Magento 2 module uses WebPack for React Components Compilation and automatic static content deployment into the Magento pub/static folder.
+
+You can develop React components even without Magento installation at all. You can just copy your component inside Magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI component.
 
 # Magento 2 Admin module built with ReactJS instead of the legacy default JS:
 
@@ -20,12 +24,12 @@ npm install
 npm start
 ```
 
-Web Puck compiles everything automatically into React/React/view/base/web/js/index_bundle.js and deploys to pub/static without running static:deploy ssh command. LiveReload Plugin will reload magento 2 pages automatically (not recommended solution by React Community. F5  more reliable solution). What you need just disable Cache of your browser during development. Also You can disable caching for single react bundle file via Nginx config.
+Web Puck compiles everything automatically into React/React/view/base/web/js/index_bundle.js and deploys to pub/static without running static:deploy ssh command. LiveReload Plugin will reload Magento 2 pages automatically (not recommended solution by React Community. F5  more reliable solution). What you need just disable the Cache of your browser during development. Also, You can disable caching for single react bundle files via Nginx config.
 
 # Easy deployment 
 
-Useage of webPack sometimes is to difficult for Magento developers. I have create anoter way to use React with magento without any compilation/complication.
-Simply add this files to the Magento instalation:
+Usage of the web-pack sometimes is too difficult for Magento developers. I have created another way to use React with Magento without any compilation/complication.
+Simply add these files to the Magento installation:
 ```
 // React JS itself 
 <script src='https://npmcdn.com/react-dom@15.3.0/dist/react-dom.min.js'></script>
@@ -56,7 +60,7 @@ ReactDOM.render(
 
 # What is Babel for Magento?
 Babel is a JavaScript compiler
-Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
+Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backward-compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
 
 Transform syntax:
 - Polyfill features that are missing in your target environment (through @babel/polyfill)
@@ -69,11 +73,11 @@ Babel can convert JSX syntax!
 
 Use Bable for Magento via UNPKG: https://unpkg.com/@babel/standalone/babel.min.js. This is a simple way to embed it on a webpage without having to do any other setup.
 
-When loaded in a browser, @babel/standalone will automatically compile and execute all Magentos script tags with type 'text/babel' or 'text/jsx'
+When loaded in a browser, @babel/standalone will automatically compile and execute all Magento’s script tags with type 'text/babel' or 'text/jsx'
 
 # Magento 2 live reload
 
-This project aims to solve the case where you want assets served by your Magento app server, but still want reloads triggered from webpack's build pipeline.
+This project aims to solve the case where you want assets served by your Magento app server, but still want reloads triggered from web packs build pipeline.
 
 Add a script tag to your page pointed at the livereload server
 
@@ -92,9 +96,9 @@ location ~ index_bundle\.js {
 ```
 
 # Similar Projects:
-Magento 2 Admin module built with ReactJS instead of legacy magento default JS: (https://github.com/Genaker/Magento2OPcacheGUI)
+Magento 2 Admin module built with ReactJS instead of legacy Magento default JS: (https://github.com/Genaker/Magento2OPcacheGUI)
 
-Good Magento 2 react approach from good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
+Good Magento 2 react approach from a good guy: (https://github.com/yireo-training/Yireo_ReactMinicart)
 
 Something similar from integer_net GmbH : (https://github.com/integer-net/magento2-reactapp)
 
@@ -107,4 +111,3 @@ bloomnation.com
 plantt.com
 gap.com
 walmart.com
-
