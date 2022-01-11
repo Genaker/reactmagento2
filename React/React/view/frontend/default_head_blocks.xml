@@ -10,6 +10,6 @@
         <!-- You could also add as an external resources 
         <css src="https://cdn.tailwindcss.com/3.0.12" src_type="url" />
         <script src="https://unpkg.com/react@17/umd/react.production.min.js" src_type="url" />
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" src_type="url" />
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" src_type="url" /> -->
     </head>
 </page>
