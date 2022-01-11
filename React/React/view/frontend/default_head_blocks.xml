@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Add local CSS resources if needed-->
+        <!--<css src="css/my-styles.css"/>-->
+
+        <!-- The following two ways to add local JavaScript files are equal -->
+        <script src="React_Js::js/react.production.min.js"/>
+        <script src="React_Js::js/react-dom.production.min.js"/>
+
+        <!-- You could also add as an external resources 
+        <css src="https://cdn.tailwindcss.com/3.0.12" src_type="url" />
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" src_type="url" />
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" src_type="url" />
+    </head>
+</page>
