@@ -6,11 +6,17 @@ React Magento 2 implementation. This Simple module explains how to add and use R
 - New improved version with the React 17 is available as a **react-17** branch (https://github.com/Genaker/reactmagento2/tree/react-17)
 - This version provides stand-along React 17 without using RequireJS
 - Default branch changed to **react-17**
+- Composer package creted **composer require genaker/magento-reactjs**
 
 It is not PWA or headless implementation which is impossible to use with an existing website. Also Single Page Application (SPA) PWA Magento 2 implementations have issues with Magento 2 API performance - too slow. This implementation is High-Performance Hybrid React integration with magento2 (with Magento 1 also easy to use) it uses inline JSON directly from the page. The same approach is used in Magento 2 backend and frontend checkout, color swatches by default. Also can use Ajax HTTP call to fetch data (not the best solution Magento API is slow and will increase the load on your backend server). Or you can use my future project "Microservices Magento" to fetch data.
 Our simplest Magento 2 module uses WebPack for React Components Compilation and automatic static content deployment into the Magento pub/static folder.
 
 You can develop React components even without Magento installation at all. You can just copy your component inside Magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI component.
+
+# Install extension via composer:
+```
+composer require genaker/magento-reactjs
+```
 
 # Magento 2 Admin module built with ReactJS instead of the legacy default JS:
 
