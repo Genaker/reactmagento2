@@ -16,6 +16,9 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload": {
+        "files": [
+            "React/React/registration.php"
+        ],
         "psr-4": {
             "React\\React\\": "React/React"
         },
