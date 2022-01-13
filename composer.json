@@ -21,9 +21,6 @@
         ],
         "psr-4": {
             "React\\React\\": "React/React"
-        },
-        "files": [
-            "registration.php"
-        ]
+        }
     }
 }
