@@ -44,6 +44,12 @@ class ReactInjectPlugin extends Renderer
      */
     protected function renderAssetHtml(\Magento\Framework\View\Asset\PropertyGroup $group)
     {
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $config = $objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+        $reactEnabled = boolval($config->getValue('react_vue_config/react/enable'));
+        $vueEnabled =boolval($config->getValue('react_vue_config/vue/enable'));
+
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
 
@@ -54,14 +60,19 @@ class ReactInjectPlugin extends Renderer
             /** @var $asset \Magento\Framework\View\Asset\AssetInterface */
             //Changes Start
             foreach ($assets as $key  => $asset) {
-                if (strpos($asset->getUrl(),'react')){
-                unset($assets[$key]);
-                array_unshift($assets, $asset);
+                if (strpos($asset->getUrl(),'react')) {
+                    unset($assets[$key]);
+                    if ($reactEnabled)
+                    array_unshift($assets, $asset);
+                } else if (strpos($asset->getUrl(),'vue')) {
+                    unset($assets[$key]);
+                    if ($vueEnabled)
+                    array_unshift($assets, $asset);
                 }
             }
             //we need execute it one more time to make scripts the same order 
             foreach ($assets as $key  => $asset) {
-                if (strpos($asset->getUrl(),'react')){
+                if (strpos($asset->getUrl(),'react') || strpos($asset->getUrl(),'vue')){
                 unset($assets[$key]);
                 array_unshift($assets, $asset);
                 }

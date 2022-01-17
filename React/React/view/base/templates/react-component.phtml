@@ -1,0 +1,17 @@
+<?php
+//React Component
+?>
+
+<div id="root" style="width: 100%;"> 
+</div>
+
+<script>
+function MagentoComponent(props) {
+  return /*#__PURE__*/React.createElement("h1", null, "Hello, Magento! - ", props.name);
+}
+
+const element = /*#__PURE__*/React.createElement(MagentoComponent, {
+  name: "React"
+});
+ReactDOM.render(element, document.getElementById('root'));
+</script>

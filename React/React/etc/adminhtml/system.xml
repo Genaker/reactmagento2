@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="react_vue" translate="label" sortOrder="999">
+			<label>ReactJS and VueJS integration</label>
+		</tab>
+		<section id="react_vue_config" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+			<label>Configuration</label>
+			<tab>react_vue</tab>
+			<resource>React_React::config_react_react</resource>
+			<group id="vue" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>VueJS configuration</label>
+				<field id="enable" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Add VueJS script </label>
+					<comment>enable VueJS</comment>
+				</field>
+			</group>
+			<group id="react" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>ReactJS configuration</label>
+				<field id="enable" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Add ReactJS script</label>
+					<comment>enable ReactJS</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
