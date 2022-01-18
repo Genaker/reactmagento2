@@ -15,6 +15,12 @@ Our simplest Magento 2 module uses WebPack for React Components Compilation and 
 
 You can develop React components even without Magento installation at all. You can just copy your component inside Magento Module and add some fixes into sources to work with Require JS and use React Component as Magento UI component.
 
+# VueJS support 
+
+![Logo-Vuejs](https://user-images.githubusercontent.com/9213670/150036919-3486e016-3d37-4ffd-b4ee-a3a3bbc961e9.png)
+
+VueJS is a progressive framework for building user interfaces. Unlike Magento 2 UI monolithic component, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. 
+
 # Install Magento ReactJS/VueJS extension via composer:
 ```
 composer require genaker/magento-reactjs
