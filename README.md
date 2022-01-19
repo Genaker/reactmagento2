@@ -21,6 +21,17 @@ You can develop React components even without Magento installation at all. You c
 
 VueJS is a progressive framework for building user interfaces. Unlike Magento 2 UI monolithic component, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. 
 
+## JS libraries footprint: 
+* ReactJS 17 - 11KB
+* ReactDOM - 120KB
+* Preact - 12KB
+* HTML for Preact - 1KB
+* RequireJS - 17KB
+* VueJS - 94KB
+* KnockoutJS - 67KB
+* jQuery - 89Kb
+* AlpineJS - 34KB
+
 ## My thougts About VUE.js PWA and Magento 2
 
 Read this article: https://blog.vuestorefront.io/yehor-shytikov-pwa-is-a-real-revolution-not-only-in-ecommerce/
