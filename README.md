@@ -21,6 +21,14 @@ You can develop React components even without Magento installation at all. You c
 
 VueJS is a progressive framework for building user interfaces. Unlike Magento 2 UI monolithic component, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. 
 
+## My thougts About VUE.js PWA and Magento 2
+
+Read this article: https://blog.vuestorefront.io/yehor-shytikov-pwa-is-a-real-revolution-not-only-in-ecommerce/
+
+Magento 2  has a better framework optimization from a development perspective. It allows developers to use the dependency injection, plugin system (**which is considered harmful AOP software development principle** read: https://yegorshytikov.medium.com/magento-2-plug-ins-aod-architecture-are-harmful-dc23c4edb534), and XML notations for layout. I personally like the folder structure in which one directory is one module. Magento 1 was messy since one module contains several folders.
+
+Magento 2 uses a modern Symphony approach but it still has a lot of legacy code. Even though it introduces a new way of embracing front-end development, however from a nowadays perspective it is not enough(legacy). No wonder as Magento 2 was released before Vue.js and React took the world popularity. These JS frameworks add more features for developers and - in general - provide more possibilities. 
+
 # Install Magento ReactJS/VueJS extension via composer:
 ```
 composer require genaker/magento-reactjs
