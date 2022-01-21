@@ -70,7 +70,7 @@ class ReactInjectPlugin extends Renderer
                     unset($assets[$key]);
                     if ($vueEnabled)
                     array_unshift($assets, $asset);
-                } else if (strpos($asset->getUrl(),'require') {
+                } else if (strpos($asset->getUrl(),'require')) {
                     unset($assets[$key]);
                     if (!$removeAdobeJSJunk)
                     array_unshift($assets, $asset);
