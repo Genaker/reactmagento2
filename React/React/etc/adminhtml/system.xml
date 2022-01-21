@@ -22,6 +22,13 @@
 					<comment>enable ReactJS</comment>
 				</field>
 			</group>
+			<group id="junk" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>Magento JS configuration</label>
+				<field id="revemove" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Remove Adobe JS Junk</label>
+					<comment>Remove Magento's default JS garbage (Require,Knokout,jQuery). You will need implement required functionality or use Magento Open Source ReactJS Luma Theme</comment>
+				</field>
+			</group>
 		</section>
 	</system>
 </config>
