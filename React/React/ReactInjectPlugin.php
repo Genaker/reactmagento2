@@ -48,8 +48,10 @@ class ReactInjectPlugin extends Renderer
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $config = $objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
         $reactEnabled = boolval($config->getValue('react_vue_config/react/enable'));
-        $vueEnabled =boolval($config->getValue('react_vue_config/vue/enable'));
-
+        $vueEnabled = boolval($config->getValue('react_vue_config/vue/enable'));
+        /* remove default magento Junky JS */
+        $removeAdobeJSJunk = boolval($config->getValue('react_vue_config/junk/remove'));
+        
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
 
@@ -67,6 +69,10 @@ class ReactInjectPlugin extends Renderer
                 } else if (strpos($asset->getUrl(),'vue')) {
                     unset($assets[$key]);
                     if ($vueEnabled)
+                    array_unshift($assets, $asset);
+                } else if (strpos($asset->getUrl(),'require') {
+                    unset($assets[$key]);
+                    if (!$removeAdobeJSJunk)
                     array_unshift($assets, $asset);
                 }
             }
