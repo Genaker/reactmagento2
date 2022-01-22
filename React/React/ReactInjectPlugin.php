@@ -56,8 +56,9 @@ class ReactInjectPlugin extends Renderer
         $pageFilter = ['checkout', 'customer'];
         
         $requestURL = $_SERVER['REQUEST_URI'];
-        $removeProtection = (strpos($requestURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
-        
+        $removeProtection = boolval(boolval(strpos($requestURL,'checkout')) || boolval(strpos($requestURL,'customer')) || $area == 'adminhtml');
+        @header("React-Protection: $removeProtection");
+
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
 
