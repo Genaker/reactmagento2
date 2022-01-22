@@ -56,7 +56,7 @@ class ReactInjectPlugin extends Renderer
         $pageFilter = ['checkout', 'customer'];
         
         $requestURL = $_SERVER['REQUEST_URI'];
-        $requresRemove = (strpos($requestURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
+        $removeProtection = (strpos($requestURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
         
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
@@ -78,7 +78,8 @@ class ReactInjectPlugin extends Renderer
                     array_unshift($assets, $asset);
                 } else if (strpos($asset->getUrl(),'require')) {
                     unset($assets[$key]);
-                    if (!$removeAdobeJSJunk && $requresRemove)
+                    // junk True ; protection False
+                    if (!$removeAdobeJSJunk || !$removeProtection)
                     array_unshift($assets, $asset);
                 }
             }
