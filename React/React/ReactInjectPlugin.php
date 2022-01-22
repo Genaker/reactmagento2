@@ -55,8 +55,8 @@ class ReactInjectPlugin extends Renderer
         $area = $state->getAreaCode();
         $pageFilter = ['checkout', 'customer'];
         
-        $requstURL = $_SERVER['REQUEST_URI'];
-        $requresRemove = (strpos($requstURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
+        $requestURL = $_SERVER['REQUEST_URI'];
+        $requresRemove = (strpos($requestURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
         
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
