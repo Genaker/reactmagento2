@@ -84,7 +84,14 @@ class ReactInjectPlugin extends Renderer
                     array_unshift($assets, $asset);
                 }
             }
-            //we need execute it one more time to make scripts the same order 
+           //we need execute it one more time to make scripts the same order 
+           foreach ($assets as $key  => $asset) {
+                if (strpos($asset->getUrl(),'require')){
+                unset($assets[$key]);
+                array_unshift($assets, $asset);
+                }
+            }
+
             foreach ($assets as $key  => $asset) {
                 if (strpos($asset->getUrl(),'react') || strpos($asset->getUrl(),'vue')){
                 unset($assets[$key]);
