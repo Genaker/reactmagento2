@@ -51,6 +51,12 @@ class ReactInjectPlugin extends Renderer
         $vueEnabled = boolval($config->getValue('react_vue_config/vue/enable'));
         /* remove default magento Junky JS */
         $removeAdobeJSJunk = boolval($config->getValue('react_vue_config/junk/remove'));
+        $state = $objectManager->get('Magento\Framework\App\State');
+        $area = $state->getAreaCode();
+        $pageFilter = ['checkout', 'customer'];
+        
+        $requstURL = $_SERVER['REQUEST_URI'];
+        $requresRemove = (strpos($requstURL,'checkout') || strpos($requestURL,'customer') || $area == 'backend');
         
         $assets = $this->processMerge($group->getAll(), $group);
         $attributes = $this->getGroupAttributes($group);
@@ -72,7 +78,7 @@ class ReactInjectPlugin extends Renderer
                     array_unshift($assets, $asset);
                 } else if (strpos($asset->getUrl(),'require')) {
                     unset($assets[$key]);
-                    if (!$removeAdobeJSJunk)
+                    if (!$removeAdobeJSJunk && $requresRemove)
                     array_unshift($assets, $asset);
                 }
             }
