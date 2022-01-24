@@ -10,6 +10,8 @@ React Magento 2 implementation. This Simple module explains how to add and use R
 - VueJS implementation 
 - Magento Configuration enable React, VueJS
 - Remove Magento's default JS Junk (Require,Knokout,jQuery) configuration. You will need implement required functionality or use Magento Open Source ReactJS Luma Theme
+- CSS optimiser feater added 
+- Magento ReactJS Luma theme released
 
 It is not PWA or headless implementation which is impossible to use with an existing website. Also Single Page Application (SPA) PWA Magento 2 implementations have issues with Magento 2 API performance - too slow. This implementation is High-Performance Hybrid React integration with magento2 (with Magento 1 also easy to use) it uses inline JSON directly from the page. The same approach is used in Magento 2 backend and frontend checkout, color swatches by default. Also can use Ajax HTTP call to fetch data (not the best solution Magento API is slow and will increase the load on your backend server). Or you can use my future project "Microservices Magento" to fetch data.
 Our simplest Magento 2 module uses WebPack for React Components Compilation and automatic static content deployment into the Magento pub/static folder.
