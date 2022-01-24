@@ -13,6 +13,13 @@ React Magento 2 implementation. This Simple module explains how to add and use R
 - CSS optimiser feater added 
 - Magento ReactJS Luma theme released
 
+# Magento Blazing-Fast React Luma Theme Implementation:
+
+<img src="https://raw.githubusercontent.com/Genaker/Luma-React-PWA-Magento-Theme/master/web/images/logo.jpeg" alt="magento react theme"/>
+<br>
+Repo is here: https://github.com/Genaker/Luma-React-PWA-Magento-Theme
+<br>
+
 It is not PWA or headless implementation which is impossible to use with an existing website. Also Single Page Application (SPA) PWA Magento 2 implementations have issues with Magento 2 API performance - too slow. This implementation is High-Performance Hybrid React integration with magento2 (with Magento 1 also easy to use) it uses inline JSON directly from the page. The same approach is used in Magento 2 backend and frontend checkout, color swatches by default. Also can use Ajax HTTP call to fetch data (not the best solution Magento API is slow and will increase the load on your backend server). Or you can use my future project "Microservices Magento" to fetch data.
 Our simplest Magento 2 module uses WebPack for React Components Compilation and automatic static content deployment into the Magento pub/static folder.
 
@@ -141,10 +148,12 @@ Something similar from integer_net GmbH : (https://github.com/integer-net/magent
 
 
 ## A lot of Big e-commerce companies Already Use this React Approach :
-BestBuy.mx
-beautycounter.com
-icuracao.com
-bloomnation.com
-plantt.com
-gap.com
-walmart.com
+BestBuy.mx<br>
+beautycounter.com<br>
+icuracao.com<br>
+bloomnation.com<br>
+plantt.com<br>
+gap.com<br>
+nuke.com<br>
+puma.com<br>
+walmart.com<br>
