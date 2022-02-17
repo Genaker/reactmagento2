@@ -55,9 +55,16 @@ Magento 2 uses a modern Symphony approach but it still has a lot of legacy code.
 composer require genaker/magento-reactjs
 ```
 
+# Disable dafault Adobe's broken Magento 2 KnockoutJS UI Components from the frontend
+
+![image](https://user-images.githubusercontent.com/9213670/154380709-8a0eaf05-266a-4aa6-9c1c-d79653dba38d.png)
+
+
+
 # Magento 2 Admin module built with ReactJS instead of the legacy default JS:
 
 (https://github.com/Genaker/Magento2OPcacheGUI)
+
 
 # How to use WebPack for React with Magento 2
 
