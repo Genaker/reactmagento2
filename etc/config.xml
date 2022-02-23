@@ -9,7 +9,7 @@
 				<enable>1</enable>
 			</react>
 			<junk>
-				<remove>0</remove>
+				<remove>1</remove>
 			</junk>
 		</react_vue_config>
 	</default>
