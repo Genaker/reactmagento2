@@ -8,6 +8,9 @@
 			<react>
 				<enable>1</enable>
 			</react>
+			<gridjs>
+				<enable>1</enable>
+			</gridjs>
 			<junk>
 				<remove>1</remove>
 			</junk>
