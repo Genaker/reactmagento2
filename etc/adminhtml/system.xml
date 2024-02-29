@@ -24,6 +24,14 @@
 					<comment>enable ReactJS</comment>
 				</field>
 			</group>
+			<group id="gridjs" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>GridJS jQuery Plugin configuration</label>
+				<field id="enable" type="select"  sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Add GridJs script</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>enable GridJS (https://gridjs.io/)</comment>
+				</field>
+			</group>
 			<group id="junk" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 				<label>Magento JS configuration</label>
 				<field id="revemove" type="select"  sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
