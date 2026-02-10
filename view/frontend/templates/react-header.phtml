@@ -2,7 +2,9 @@
 $isProductPage = $this->registry->registry('current_product') ? true : false;
 $criticalCSSHTML = boolval($this->config->getValue('react_vue_config/css/critical'));
 
-if ($criticalCSSHTML || isset($_GET['css-html'])) {
+// Use request object instead of direct $_GET access
+$cssHtmlParam = $this->getRequest()->getParam('css-html');
+if ($criticalCSSHTML || $cssHtmlParam !== null) {
     $criticalCSSHTML = true;
 }
 if ($isProductPage && $criticalCSSHTML) {
@@ -24,12 +26,12 @@ $currentUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => tru
 $uenc = base64_encode($currentUrl);
 
 if ($product) {?>
-window.productType = "<?=$product->getTypeId();?>";
+window.productType = <?= json_encode($product->getTypeId()) ?>;
 <?php }?>
-window.curentUenc = "<?=$uenc?>";
-window.controller = "<?=$controller?>";
-window.action = "<?=$action?>";
-window.fullAction = "<?=$fullAction?>";
+window.curentUenc = <?= json_encode($uenc) ?>;
+window.controller = <?= json_encode($controller) ?>;
+window.action = <?= json_encode($action) ?>;
+window.fullAction = <?= json_encode($fullAction) ?>;
 </script>
 
 

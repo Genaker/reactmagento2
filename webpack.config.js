@@ -6,7 +6,7 @@ const liveReloadOptions = {
 
 }
 
-console.log('Dirrectory for compiling:');
+console.log('Directory for compiling:');
 console.log(path.join(__dirname, "/view/base/web/js/"));
 
 module.exports = {
@@ -42,17 +42,20 @@ module.exports = {
   //Deployment path needs to be adjusted  
   plugins: [
     new LiveReloadPlugin(),
-    new CopyWebpackPlugin([
+    // Webpack 5 uses different syntax for CopyWebpackPlugin
+    new CopyWebpackPlugin({
+      patterns: [
         {
-          from:path.join(__dirname, "/view/base/web/js/"),
-          to:'../../../../../../../../pub/static/frontend/{ThemeNamae}/{theme}/en_US/React_React/js/',
+          from: path.join(__dirname, "/view/base/web/js/"),
+          to: '../../../../../../../../pub/static/frontend/{ThemeName}/{theme}/en_US/React_React/js/',
           force: true
         },
-      {
-        from:path.join(__dirname, "/view/base/web/js/"),
-        to:'../../../../../../../../magento/pub/static/frontend/{ThemeName}/{theme}/en_US/React_React/js/',
-        force: true
-      }
-      ]),
-]
+        {
+          from: path.join(__dirname, "/view/base/web/js/"),
+          to: '../../../../../../../../magento/pub/static/frontend/{ThemeName}/{theme}/en_US/React_React/js/',
+          force: true
+        }
+      ]
+    }),
+  ]
 };

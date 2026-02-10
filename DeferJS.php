@@ -3,13 +3,21 @@
 namespace React\React;
 
 use Magento\Framework\App\Config\ScopeConfigInterface as Config;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Event\ObserverInterface;
 
 class DeferJS implements ObserverInterface
 {
+    /**
+     * @var RequestInterface
+     */
+    private $request;
+    
     public function __construct(
-        protected Config $config
+        protected Config $config,
+        RequestInterface $request
     ) {
+        $this->request = $request;
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -44,13 +52,19 @@ class DeferJS implements ObserverInterface
         $response->setBody($html);
     }
 
+    /**
+     * Check if JS deferral should be applied
+     * 
+     * @return bool
+     */
     private function shouldDeferJS(): bool
     {
-        // Check GET parameter first
-        if (isset($_GET['defer-js']) && $_GET['defer-js'] === "false") {
+        // Check GET parameter first (use request object)
+        $getParam = $this->request->getParam('defer-js');
+        if ($getParam === "false") {
             return false;
         }
-        if (isset($_GET['defer-js']) && $_GET['defer-js'] === "true") {
+        if ($getParam === "true") {
             return true;
         }
         
