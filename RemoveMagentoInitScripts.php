@@ -74,16 +74,13 @@ class RemoveMagentoInitScripts
             
             // Set performance timing header
             $this->headerService->setServerTiming($subject, 'x-mag-init', $duration);
+            
+            return $result;
         }
 
-        if (!$removeAdobeJSJunk) {
-            // Move scripts to bottom if junk removal is disabled
-            $html = $result;
-            if (empty($html)) {
-                return $result;
-            }
-            
-            $result = $this->htmlProcessor->moveScriptsToBottom($html);
+        // Junk removal is disabled - move scripts to bottom instead
+        if (!empty($result)) {
+            $result = $this->htmlProcessor->moveScriptsToBottom($result);
         }
 
         return $result;

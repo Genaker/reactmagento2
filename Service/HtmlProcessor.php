@@ -37,7 +37,8 @@ class HtmlProcessor
             libxml_use_internal_errors(true);
             
             // Load HTML with UTF-8 encoding
-            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            // Note: Not using LIBXML_HTML_NOIMPLIED to ensure proper HTML structure handling
+            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NODEFDTD);
             
             // Clear errors
             libxml_clear_errors();
@@ -79,7 +80,8 @@ class HtmlProcessor
         try {
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            // Note: Not using LIBXML_HTML_NOIMPLIED to ensure proper HTML structure handling
+            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NODEFDTD);
             libxml_clear_errors();
             
             $xpath = new \DOMXPath($dom);

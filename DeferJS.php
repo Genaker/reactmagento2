@@ -35,7 +35,7 @@ class DeferJS implements ObserverInterface
         }
         
         $html = $response->getBody();
-        if (empty($html)) {
+        if ($html === '' || $html === null) {
             return;
         }
         
