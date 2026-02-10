@@ -4,20 +4,24 @@
  * Tests CSS deferral logic with document.write() for desktop blocking load
  * 
  * Run: vendor/bin/pest Unit/DeferCSS.test.php
+ * 
+ * Updated to use MockRequest instead of direct $_GET access
  */
 
 class DeferCSSTestHelper
 {
     private $actualInstance;
     private $reflection;
+    private $request;
     
     public function __construct($dependencies = [])
     {
         // Create mock dependencies if not provided
         $scopeConfig = $dependencies['scopeConfig'] ?? new MockScopeConfig();
+        $this->request = $dependencies['request'] ?? new MockRequest();
         
         // Create the ACTUAL DeferCSS instance from Magento!
-        $this->actualInstance = new \React\React\DeferCSS($scopeConfig);
+        $this->actualInstance = new \React\React\DeferCSS($scopeConfig, $this->request);
         $this->reflection = new \ReflectionClass($this->actualInstance);
     }
     
@@ -61,7 +65,7 @@ class DeferCSSTestHelper
 }
 
 // Mock classes that implement actual Magento interfaces
-// MockScopeConfig is loaded from Unit/Mocks.php
+// MockScopeConfig and MockRequest are loaded from Unit/Mocks.php
 
 beforeEach(function () {
     $this->helper = new DeferCSSTestHelper();
