@@ -33,7 +33,7 @@ $uenc = base64_encode($currentUrl);
 if ($product) {?>
 window.productType = <?= json_encode($product->getTypeId()) ?>;
 <?php }?>
-window.curentUenc = <?= json_encode($uenc) ?>;
+window.currentUenc = <?= json_encode($uenc) ?>;
 window.controller = <?= json_encode($controller) ?>;
 window.action = <?= json_encode($action) ?>;
 window.fullAction = <?= json_encode($fullAction) ?>;
