@@ -6,6 +6,24 @@ React-Luma is 20% faster than any M2 front-end, including Hyva, today!
 
 <img width="781" alt="image" src="https://github.com/user-attachments/assets/adad25f3-d394-4b00-8661-52e3165f6af7" />
 
+## 📚 Documentation
+
+- **[Architecture Documentation](ARCHITECTURE.md)** - Detailed architecture, design patterns, and core components
+- **[Deployment Guide](DEPLOYMENT.md)** - Installation, configuration, testing, and troubleshooting
+- **[Developer Guide](DEVELOPER_GUIDE.md)** - Extending the module, best practices, and development workflow
+- **[CSS Purge Tool](PURGE_README.md)** - CSS optimization and purging documentation
+
+## ✨ Key Features
+
+- **🚀 Performance First**: 20% faster than standard Magento 2 and Hyva
+- **🔒 Security Hardened**: Input validation, CSRF protection, safe HTML processing
+- **🎨 No Theme Changes Required**: Works with any existing Magento 2 theme
+- **🏗️ Clean Architecture**: Service-oriented design with dependency injection
+- **🧪 Fully Tested**: Comprehensive unit test coverage
+- **📦 Easy Installation**: Simple Composer installation
+- **⚙️ Configurable**: Extensive configuration options via admin panel or CLI
+- **🔧 Developer Friendly**: Well-documented, extensible, follows Magento best practices
+
 ## CSS Deployment Guide
 
 **Known issue**: The CSS files are not loading correctly on the frontend. The layout is broken due to missing or non-deployed static CSS assets.
