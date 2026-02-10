@@ -2,23 +2,36 @@
 
 namespace React\React;
 
-use Magento\Framework\App\Config\ScopeConfigInterface as Config;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\HttpInterface as HttpResponse;
+use React\React\Service\ConfigurationProvider;
+use React\React\Service\HtmlProcessor;
+use React\React\Service\RequestValidator;
+use React\React\Service\ResponseHeaderService;
+use Psr\Log\LoggerInterface;
 
+/**
+ * Plugin to remove Magento init scripts from HTML output
+ */
 class RemoveMagentoInitScripts
 {
-    private $flag = false;
-
-    private $actionFilter = [
-        'catalog_category_view',
-        'cms_index_index',
-        'cms_page_view',
-        'catalog_product_view',
-        'catalogsearch_result_index',
-        'cms_noroute_index',
-        'customer_account_login',
-        'customer_account_create',
-    ];
+    /**
+     * @param RequestInterface $request
+     * @param ConfigurationProvider $configProvider
+     * @param HtmlProcessor $htmlProcessor
+     * @param RequestValidator $requestValidator
+     * @param ResponseHeaderService $headerService
+     * @param LoggerInterface $logger
+     */
+    public function __construct(
+        private RequestInterface $request,
+        private ConfigurationProvider $configProvider,
+        private HtmlProcessor $htmlProcessor,
+        private RequestValidator $requestValidator,
+        private ResponseHeaderService $headerService,
+        private LoggerInterface $logger
+    ) {
+    }
 
     /**
      * Modify the final HTML output before sending it to the browser.
@@ -29,52 +42,49 @@ class RemoveMagentoInitScripts
      */
     public function afterGetContent(HttpResponse $subject, $result)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $request = $objectManager->get(\Magento\Framework\App\Request\Http::class);
-        $config = $objectManager->get(Config::class);
-        $removeAdobeJSJunk = boolval($config->getValue('react_vue_config/junk/remove'));
-        if (isset($_GET['js-junk']) && $_GET['js-junk'] === "false") {
-            $removeAdobeJSJunk = false;
-        }
-        if (isset($_GET['js-junk']) && $_GET['js-junk'] === "true") {
-            $removeAdobeJSJunk = true;
+        // Get configuration
+        $removeAdobeJSJunk = $this->configProvider->isJunkRemovalEnabled();
+        
+        // Check for parameter override (validated)
+        $paramOverride = $this->requestValidator->getValidatedBoolParam($this->request, 'js-junk');
+        if ($paramOverride !== null && $this->requestValidator->isParameterOverrideAllowed($this->request)) {
+            $removeAdobeJSJunk = $paramOverride;
         }
 
         if ($removeAdobeJSJunk) {
-            $actionName = $request->getFullActionName();
+            $actionName = $this->request->getFullActionName();
             $content = $result;
 
-            if (!in_array($actionName, $this->actionFilter)) {
+            // Check if page type is allowed for optimization
+            if (!$this->configProvider->isPageTypeAllowed($actionName)) {
                 return $result;
             }
-            if ((!is_string($content) || empty($content) || $this->flag)) {
+            
+            if (!is_string($content) || empty($content)) {
                 return $result;
             }
 
             $startTime = microtime(true);
-            // Remove all `<script type="text/x-magento-init">` blocks
-            $result = preg_replace('/<script[^>]+type=["\']text\/x-magento-init["\'][^>]*>.*?<\/script>/is', '', $result);
-            //$this->flag = true;
+            
+            // Use HtmlProcessor service to remove init scripts
+            $result = $this->htmlProcessor->removeMagentoInitScripts($result);
+            
             $endTime = microtime(true);
-            $time = $endTime - $startTime;
-            header("Server-Timing: x-mag-init;dur=" . number_format($time * 1000, 2), false);
+            $duration = ($endTime - $startTime) * 1000; // Convert to milliseconds
+            
+            // Set performance timing header
+            $this->headerService->setServerTiming($subject, 'x-mag-init', $duration);
         }
 
-        if ($removeAdobeJSJunk) {
-            return $result;
+        if (!$removeAdobeJSJunk) {
+            // Move scripts to bottom if junk removal is disabled
+            $html = $result;
+            if (empty($html)) {
+                return $result;
+            }
+            
+            $result = $this->htmlProcessor->moveScriptsToBottom($html);
         }
-
-        $html = $result;
-        if ($html == '') {
-            return $result;
-        }
-        $conditionalJsPattern = '@(?:<script type="text/javascript"|<script)(.*)</script>@msU';
-        preg_match_all($conditionalJsPattern, $html, $_matches);
-        $jsHtml = implode('', $_matches[0]);
-        $html = preg_replace($conditionalJsPattern, '', $html);
-        $html .= $jsHtml;
-
-        $result = $html;
 
         return $result;
     }
