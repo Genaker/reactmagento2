@@ -8,12 +8,17 @@ if ($criticalCSSHTML || $cssHtmlParam !== null) {
     $criticalCSSHTML = true;
 }
 if ($isProductPage && $criticalCSSHTML) {
-    $css = @file_get_contents(BP . '/pub/static/product-critical-m.css');
-    ?>
+    $cssFile = BP . '/pub/static/product-critical-m.css';
+    if (file_exists($cssFile)) {
+        $css = file_get_contents($cssFile);
+        if ($css !== false) {
+            ?>
 <style media="all" id="critical-css">
 <?=$css?>
 </style>
 <?php
+        }
+    }
 }?>
 <script>
 <?php
