@@ -61,11 +61,14 @@ class PostDeployCopy
 
     /**
      * Copy custom static files from module to main static directory
+     * 
+     * @return void
      */
     private function copyCustomStaticFiles()
     {
         $sourcePath = dirname(__DIR__) . '/pub/static';
         $targetPath = BP . '/pub/static';
+        
         if (!is_dir($sourcePath)) {
             $this->logger->warning('Source directory does not exist: ' . $sourcePath);
             return;
@@ -75,30 +78,43 @@ class PostDeployCopy
     }
 
     /**
-     * Recursively copy directory contents
+     * Recursively copy directory contents with security checks
      *
      * @param string $source
      * @param string $destination
+     * @return void
      */
     private function copyDirectory($source, $destination)
     {
+        // Use RecursiveDirectoryIterator instead of opendir/readdir for better security
+        try {
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::SELF_FIRST
+            );
 
-        $dir = opendir($source);
-        while (($file = readdir($dir)) !== false) {
-            if ($file === '.' || $file === '..') {
-                continue;
+            foreach ($iterator as $item) {
+                $sourcePath = $item->getPathname();
+                $relativePath = substr($sourcePath, strlen($source) + 1);
+                $destPath = $destination . '/' . $relativePath;
+                
+                // Security: Prevent symlink traversal attacks
+                if (is_link($sourcePath)) {
+                    $this->logger->warning('Skipping symlink: ' . $sourcePath);
+                    continue;
+                }
+                
+                if ($item->isDir()) {
+                    if (!is_dir($destPath)) {
+                        mkdir($destPath, 0755, true);
+                    }
+                } else {
+                    $this->copyFile($sourcePath, $destPath);
+                }
             }
-
-            $sourcePath = $source . '/' . $file;
-            $destPath = $destination . '/' . $file;
-
-            if (is_dir($sourcePath)) {
-                $this->copyDirectory($sourcePath, $destPath);
-            } else {
-                $this->copyFile($sourcePath, $destPath);
-            }
+        } catch (\Exception $e) {
+            $this->logger->error('Error copying directory: ' . $e->getMessage());
         }
-        closedir($dir);
     }
 
     /**

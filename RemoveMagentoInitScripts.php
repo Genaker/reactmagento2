@@ -32,11 +32,14 @@ class RemoveMagentoInitScripts
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $request = $objectManager->get(\Magento\Framework\App\Request\Http::class);
         $config = $objectManager->get(Config::class);
+        
+        // Use request object instead of direct $_GET access
         $removeAdobeJSJunk = boolval($config->getValue('react_vue_config/junk/remove'));
-        if (isset($_GET['js-junk']) && $_GET['js-junk'] === "false") {
+        $jsJunkParam = $request->getParam('js-junk');
+        if ($jsJunkParam === "false") {
             $removeAdobeJSJunk = false;
         }
-        if (isset($_GET['js-junk']) && $_GET['js-junk'] === "true") {
+        if ($jsJunkParam === "true") {
             $removeAdobeJSJunk = true;
         }
 

@@ -239,7 +239,7 @@ var mage = (() => {
     }
     
     getUenc = () => {
-        return window.curentUenc;
+        return window.currentUenc;
     }
     
     async function addToCompare(productId) {

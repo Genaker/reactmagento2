@@ -12,6 +12,8 @@
  * - We use the ACTUAL DeferJS class
  * - Dependencies are mocked
  * - NO method copying needed!
+ * 
+ * Updated to use MockRequest instead of direct $_GET access
  */
 
 /**
@@ -24,15 +26,17 @@ class DeferJSTestHelper
 {
     private $actualInstance;
     private $reflection;
+    private $request;
     
     public function __construct($dependencies = [])
     {
         // Create mock dependencies if not provided
         $scopeConfig = $dependencies['scopeConfig'] ?? new MockScopeConfig();
+        $this->request = $dependencies['request'] ?? new MockRequest();
         
         // Create the ACTUAL DeferJS instance from Magento!
         // The bootstrap autoloader will handle loading interfaces
-        $this->actualInstance = new \React\React\DeferJS($scopeConfig);
+        $this->actualInstance = new \React\React\DeferJS($scopeConfig, $this->request);
         $this->reflection = new \ReflectionClass($this->actualInstance);
     }
     
@@ -42,6 +46,14 @@ class DeferJSTestHelper
     public function getInstance()
     {
         return $this->actualInstance;
+    }
+    
+    /**
+     * Get the mock request object
+     */
+    public function getRequest()
+    {
+        return $this->request;
     }
     
     /**
@@ -64,52 +76,49 @@ class DeferJSTestHelper
 }
 
 // Mock classes that implement actual Magento interfaces
-// MockScopeConfig is loaded from Unit/Mocks.php
+// MockScopeConfig and MockRequest are loaded from Unit/Mocks.php
 
 beforeEach(function () {
     $this->helper = new DeferJSTestHelper();
 });
 
-test('shouldDeferJS returns false when GET parameter defer-js is false', function () {
-    $_GET['defer-js'] = 'false';
-    $result = $this->helper->callMethod('shouldDeferJS');
-    unset($_GET['defer-js']);
+test('shouldDeferJS returns false when request parameter defer-js is false', function () {
+    $mockRequest = new MockRequest(['defer-js' => 'false']);
+    $helper = new DeferJSTestHelper(['request' => $mockRequest]);
+    $result = $helper->callMethod('shouldDeferJS');
     
     expect($result)->toBeFalse();
 });
 
-test('shouldDeferJS returns true when GET parameter defer-js is true', function () {
-    $_GET['defer-js'] = 'true';
-    $result = $this->helper->callMethod('shouldDeferJS');
-    unset($_GET['defer-js']);
+test('shouldDeferJS returns true when request parameter defer-js is true', function () {
+    $mockRequest = new MockRequest(['defer-js' => 'true']);
+    $helper = new DeferJSTestHelper(['request' => $mockRequest]);
+    $result = $helper->callMethod('shouldDeferJS');
     
     expect($result)->toBeTrue();
 });
 
-test('shouldDeferJS uses config value when GET parameter not set', function () {
-    // Clear GET parameter
-    unset($_GET['defer-js']);
-    
+test('shouldDeferJS uses config value when request parameter not set', function () {
     // Test with config disabled
     $helperDisabled = new DeferJSTestHelper([
-        'scopeConfig' => new MockScopeConfig(['react_vue_config/junk/defer_js' => '0'])
+        'scopeConfig' => new MockScopeConfig(['react_vue_config/junk/defer_js' => '0']),
+        'request' => new MockRequest()
     ]);
     expect($helperDisabled->callMethod('shouldDeferJS'))->toBeFalse();
     
     // Test with config enabled
     $helperEnabled = new DeferJSTestHelper([
-        'scopeConfig' => new MockScopeConfig(['react_vue_config/junk/defer_js' => '1'])
+        'scopeConfig' => new MockScopeConfig(['react_vue_config/junk/defer_js' => '1']),
+        'request' => new MockRequest()
     ]);
     expect($helperEnabled->callMethod('shouldDeferJS'))->toBeTrue();
 });
 
 test('shouldDeferJS defaults to true when config is not set', function () {
-    // Clear GET parameter
-    unset($_GET['defer-js']);
-    
     // Test with config not set (null)
     $helperDefault = new DeferJSTestHelper([
-        'scopeConfig' => new MockScopeConfig([])
+        'scopeConfig' => new MockScopeConfig([]),
+        'request' => new MockRequest()
     ]);
     expect($helperDefault->callMethod('shouldDeferJS'))->toBeTrue();
 });

@@ -3,13 +3,21 @@
 namespace React\React;
 
 use Magento\Framework\App\Config\ScopeConfigInterface as Config;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Event\ObserverInterface;
 
 class DeferCSS implements ObserverInterface
 {
+    /**
+     * @var RequestInterface
+     */
+    private $request;
+    
     public function __construct(
-        protected Config $config
+        protected Config $config,
+        RequestInterface $request
     ) {
+        $this->request = $request;
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -32,13 +40,19 @@ class DeferCSS implements ObserverInterface
         $response->setBody($html);
     }
 
+    /**
+     * Check if CSS deferral should be applied
+     * 
+     * @return bool
+     */
     private function shouldDeferCSS(): bool
     {
-        // Check GET parameter first
-        if (isset($_GET['defer-css']) && $_GET['defer-css'] === "false") {
+        // Check GET parameter first (use request object)
+        $getParam = $this->request->getParam('defer-css');
+        if ($getParam === "false") {
             return false;
         }
-        if (isset($_GET['defer-css']) && $_GET['defer-css'] === "true") {
+        if ($getParam === "true") {
             return true;
         }
         
