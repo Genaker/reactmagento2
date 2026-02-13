@@ -2,61 +2,70 @@
 
 namespace React\React;
 
-use Magento\Framework\App\Config\ScopeConfigInterface as Config;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Event\ObserverInterface;
+use React\React\Service\ConfigurationProvider;
+use React\React\Service\HtmlProcessor;
+use React\React\Service\RequestValidator;
 
+/**
+ * Observer to defer JavaScript loading
+ */
 class DeferJS implements ObserverInterface
 {
+    /**
+     * @param RequestInterface $request
+     * @param ConfigurationProvider $configProvider
+     * @param HtmlProcessor $htmlProcessor
+     * @param RequestValidator $requestValidator
+     */
     public function __construct(
-        protected Config $config
+        private RequestInterface $request,
+        private ConfigurationProvider $configProvider,
+        private HtmlProcessor $htmlProcessor,
+        private RequestValidator $requestValidator
     ) {
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $removeAdobeJSJunk = boolval($this->config->getValue('react_vue_config/junk/remove'));
-
         $response = $observer->getEvent()->getData('response');
         if (!$response) {
             return;
         }
+        
         $html = $response->getBody();
-        if ($html == '') {
+        if ($html === '' || $html === null) {
             return;
         }
         
-        if ($removeAdobeJSJunk) {
+        // If junk removal is enabled, skip defer (handled by RemoveMagentoInitScripts)
+        if ($this->configProvider->isJunkRemovalEnabled()) {
+            return;
+        }
+        
+        // Check if defer JS is enabled (config or validated parameter)
+        if ($this->shouldDeferJS()) {
+            $html = $this->htmlProcessor->moveScriptsToBottom($html);
             $response->setBody($html);
-            return;
         }
-        
-        // Check if defer JS is enabled (config or GET parameter)
-        $deferJS = $this->shouldDeferJS();
-        if ($deferJS) {
-            // Move scripts to bottom, but preserve scripts with no-defer attribute
-            $conditionalJsPattern = '@(?:<script type="text/javascript"|<script)(?![^>]*no-defer)(.*)</script>@msU';
-            preg_match_all($conditionalJsPattern, $html, $_matches);
-            $jsHtml = implode('', $_matches[0]);
-            $html = preg_replace($conditionalJsPattern, '', $html);
-            $html .= $jsHtml;
-        }
-        
-        $response->setBody($html);
     }
 
+    /**
+     * Determine if JS should be deferred
+     * 
+     * @return bool
+     */
     private function shouldDeferJS(): bool
     {
-        // Check GET parameter first
-        if (isset($_GET['defer-js']) && $_GET['defer-js'] === "false") {
-            return false;
-        }
-        if (isset($_GET['defer-js']) && $_GET['defer-js'] === "true") {
-            return true;
+        // Check for validated parameter override
+        $paramOverride = $this->requestValidator->getValidatedBoolParam($this->request, 'defer-js');
+        
+        if ($paramOverride !== null && $this->requestValidator->isParameterOverrideAllowed($this->request)) {
+            return $paramOverride;
         }
         
-        // Fall back to config (default to true if not set)
-        $configValue = $this->config->getValue('react_vue_config/junk/defer_js');
-        return $configValue === null || $configValue === '' ? true : boolval($configValue);
+        // Fall back to configuration
+        return $this->configProvider->isDeferJsEnabled();
     }
-
 }
